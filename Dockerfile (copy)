@@ -1,0 +1,10 @@
+FROM anarcher/mini-golang:1.3
+
+RUN apk-install git
+
+RUN go get github.com/mrwilson/helixdns && \
+    go install github.com/mrwilson/helixdns
+
+EXPOSE 53
+
+CMD [ "helixdns", "-port", "53", "-etcd-address", "127.0.0.1:4001" ]
